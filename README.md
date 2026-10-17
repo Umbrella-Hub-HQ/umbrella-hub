@@ -11,6 +11,21 @@ It holds system information only. It is not a control panel and it cannot reach 
 
 ---
 
+## Install the template
+
+The v9 template is 5 linked packs. Install them in order; see **[packs/HOW-TO-INSTALL.md](packs/HOW-TO-INSTALL.md)** for plain step-by-step instructions.
+
+**Pack 1: Umbrella Chief bot template (v9).** Core OS and safety: safety rules, getting-started setup, delegation, rooms, routine guards, quality gates, all core memories, and the hub `weekly-report` and `update-check` routines. Works on its own. *Template link will be added here when it is published.*
+
+**Packs 2-5: downloads.** Give your Umbrella Chief bot the raw file link and ask it to install the pack. It adds the skills and routines only with your yes, and keeps everything paused and in paper mode.
+
+| Pack | Name | What's in it | Download (raw) |
+| --- | --- | --- | --- |
+| 2 | Crypto Desk | Crypto intelligence OS, Rug Shield (security + risk veto) and Trading Scout role cards, crypto move cards, team-trading clear verdict: discovery, caller watch/pipeline, fast-lane, market brief, paper/position monitors, filter test routines (5 skills, 9 routines) | [umbrella-template-v9-pack2.stage-payload.json](https://raw.githubusercontent.com/Umbrella-Hub-HQ/umbrella-hub/main/packs/umbrella-template-v9-pack2.stage-payload.json) |
+| 3 | Robinhood, Quant & Evolve | Robinhood trading rules, role card and four-routine set, trading protocols, Quant Lab and desk playbooks library, capped-wallet engine, evolve/deeper triggers, self-update, shadow voting (10 skills, 7 routines) | [umbrella-template-v9-pack3.stage-payload.json](https://raw.githubusercontent.com/Umbrella-Hub-HQ/umbrella-hub/main/packs/umbrella-template-v9-pack3.stage-payload.json) |
+| 4 | Content & Research | Draft-only AI content studio, Shorts/voiceover, AI video and image, social research methods, last30days, writing-clarity check, source provenance, knowledge bases and indexes; Content Studio, X/TikTok desk, Venture Studio and utility-bot role cards (13 skills, 2 routines) | [umbrella-template-v9-pack4.stage-payload.json](https://raw.githubusercontent.com/Umbrella-Hub-HQ/umbrella-hub/main/packs/umbrella-template-v9-pack4.stage-payload.json) |
+| 5 | Academy & Org | Academy role card and 12 teaching skills, contrarian third view, Org Architect, org governance, bot design checklist, Memory Transfer and Umbrella Brain role cards; governance-audit routine (18 skills, 1 routine) | [umbrella-template-v9-pack5.stage-payload.json](https://raw.githubusercontent.com/Umbrella-Hub-HQ/umbrella-hub/main/packs/umbrella-template-v9-pack5.stage-payload.json) |
+
 ## How updates flow out (Releases)
 
 Every update is a [GitHub Release](../../releases). Each Release has:
@@ -55,5 +70,7 @@ See [PRIVACY.md](PRIVACY.md) for the short version.
 | `routines/weekly-report.md` | Prompt a template bot follows to draft and (with approval) post a weekly report |
 | `routines/update-check.md` | Prompt a template bot follows to check for new Releases and summarize them |
 | `.github/ISSUE_TEMPLATE/weekly-report.yml` | The weekly report form |
+| `packs/HOW-TO-INSTALL.md` | Step-by-step install for the v9 packs |
+| `packs/umbrella-template-v9-pack2..5.stage-payload.json` | Packs 2-5 (Crypto Desk; Robinhood, Quant & Evolve; Content & Research; Academy & Org) for your Umbrella Chief bot to install with your yes |
 | `PRIVACY.md` | Privacy boundaries |
 | `CHANGELOG.md` | Version history |
