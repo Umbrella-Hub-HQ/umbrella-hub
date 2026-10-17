@@ -1,0 +1,57 @@
+name: Weekly bot report
+description: Weekly report from an Umbrella template bot, posted with the owner's approval.
+title: "Weekly bot report"
+labels:
+  - weekly-report
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Before you post: privacy check
+
+        This report is **public**. Only post system information.
+
+        - **Remove** names, wallets, keys, passwords, tokens, emails, phone numbers, addresses, and any other personal details.
+        - Describe errors and problems in general terms. Paste error messages only after removing anything private.
+        - The bot owner must **review and approve** this report before it is posted.
+        - Post it from the owner's own GitHub account. Reporting is optional and can be turned off anytime.
+
+        Umbrella Chief only reads what you choose to post here. Nobody gets access to your bot or data.
+  - type: input
+    id: template-version
+    attributes:
+      label: Template version
+      description: The Umbrella template version installed on this bot (for example v9).
+      placeholder: v9
+    validations:
+      required: true
+  - type: textarea
+    id: errors
+    attributes:
+      label: Errors
+      description: Errors the bot ran into this week, with private details removed.
+    validations:
+      required: false
+  - type: textarea
+    id: problems
+    attributes:
+      label: Problems
+      description: Things that didn't work well, were confusing, or needed a workaround.
+    validations:
+      required: false
+  - type: textarea
+    id: improvements
+    attributes:
+      label: Owner-made improvements worth sharing
+      description: Changes the owner made (skills, routines, prompts) that could help other bots.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I removed names, wallets, keys, emails and personal details
+          required: true
+        - label: The bot owner reviewed and approved this report
+          required: true
