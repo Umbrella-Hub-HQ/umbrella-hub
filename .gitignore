@@ -1,0 +1,25 @@
+# Never commit secrets or runtime state
+*.env
+.env*
+!*.env.example
+tools/**/config.json
+tools/**/flywheel_config.json
+tools/**/wallets.json
+tools/wallets.json
+tools/**/*.jsonl
+tools/**/*.ndjson
+tools/**/state.json
+tools/**/status.json
+tools/**/beat.json
+tools/**/last_reported.json
+tools/**/flywheel_state.json
+tools/**/flywheel_status.json
+tools/**/flywheel_beat.json
+tools/**/leads.json
+tools/**/*.log
+tools/**/*.lock
+tools/**/.supervise.lock
+tools/**/.flywheel_supervise.lock
+tools/**/data/
+tools/.http/
+__pycache__/
