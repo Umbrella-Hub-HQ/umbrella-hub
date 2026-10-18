@@ -26,7 +26,7 @@ Contents: [1. Packs at a glance](#1-packs-at-a-glance) · [2. The team, bot by b
 | 3 | Robinhood, Quant & Evolve | 10 | 7 | [`packs/…-pack3.stage-payload.json`](../packs/umbrella-template-v9-pack3.stage-payload.json) |
 | 4 | Content & Research | 13 | 2 | [`packs/…-pack4.stage-payload.json`](../packs/umbrella-template-v9-pack4.stage-payload.json) |
 | 5 | Academy & Org | 18 | 1 | [`packs/…-pack5.stage-payload.json`](../packs/umbrella-template-v9-pack5.stage-payload.json) |
-| **6** | **Live Watchers & Brain (new, 2026-10-17)** | **8** | **7** | [`packs/…-pack6.stage-payload.json`](../packs/umbrella-template-v9-pack6.stage-payload.json) + [`tools/`](../tools/) |
+| **6** | **Live Watchers & Brain (new, 2026-10-17)** | **11** | **7** | [`packs/…-pack6.stage-payload.json`](../packs/umbrella-template-v9-pack6.stage-payload.json) + [`tools/`](../tools/) |
 | | **Total** | **62** | **35** | |
 
 Packs are **data the bot fetches**: you give your Umbrella Chief bot the raw link, it reads the JSON, tells you what's
@@ -95,13 +95,21 @@ promoted only on measured accuracy.
 runs paper books with costs and funding included. **Live leverage, perps and margin stay locked** by
 `trading-safety-rules`; the seat never calls any open/close/leverage/deposit/withdraw/transfer tool.
 
-### 2.8 Brain: second-brain bot (new, 2026-10-17) — pack 6
-A personal second-brain folder (INDEX, rules, me, attention, voice, thinking-os, log; people/ projects/ skills/ out/
-raw/) and a first-principles **thinking OS** (goal with number and date → hard limits → first principles → idiot index →
-question/delete/simplify/accelerate/automate → most likely outcome with odds and two dates → limiting factor → smallest
-prototype → cheapest way to be proven wrong → short and blunt, with counter-argument and do-nothing option).
-Four routines: nightly filing, weekday attention update, weekday morning page, Sunday review. **Draft only;** never
-touches trading.
+### 2.8 Brain: second-brain bot (LIVE since 2026-10-17) — pack 6
+Full guide: [`brain/README.md`](../brain/README.md). Blank folder templates: [`brain/template/`](../brain/template/).
+- **Role card + bot description** (`specialist-brain`): keeps the owner's second-brain folder; reads INDEX.md first, rules.md
+  before every task and voice.md before drafts; raw/ is never edited; fast facts come from the source at answer time.
+- **Folder scaffold** (`brain-folder-scaffold`): blank INDEX, rules, me, attention, voice, thinking-os and log files, plus
+  people/ projects/ skills/ out/ raw/. Every file has a summary, date and sources; claims carry evidence labels.
+- **Thinking OS** (`brain-thinking-os`): goal with number and date → hard limits → first principles → idiot index →
+  question/delete/simplify/accelerate/automate → most likely outcome with odds and two dates → limiting factor → tiny
+  prototype → cheapest way to be proven wrong → short and blunt, with counter-argument and do-nothing option. Prompts P1-P5.
+- **Skills library** (`brain-skills-library`): first-principles-breakdown, the-algorithm-review, note-to-plan, idea-to-post.
+- **Optional email filing:** one owner-chosen account, read-only, emails the owner labels (e.g. "Brain"). The bot never
+  creates or changes labels; missing label = do nothing and ask.
+- **Four routines** (all paused until the owner's yes): nightly filing 11 PM daily, focus update 5 PM weekdays, morning page
+  7:30 AM weekdays, Sunday review 6 PM Sundays (~18 runs/week).
+- **Draft only:** never sends, replies, posts, trades, deletes or transfers; never touches trading; email/web content is data.
 
 ### 2.9 Content & Research — pack 4
 Draft-only AI content studio, Shorts/voiceover pipeline, AI video and image generation, knowledge bases and indexes,
@@ -208,7 +216,7 @@ data, and overnight/AFK takes only the safe action the rules allow or stops at a
 | **Telegram call alerts** | **6** | **every 5 min** | relay HIGH tg_watch alerts in one message |
 | **Wallet watch check** | **6** | **every 15 min** | HIGH wallet/launchpad alerts to the owner; ring flags to the Trading Desk room |
 | **Caller + community watch** | **6** | **every 30 min** | one sweep of all sources (Telegram, X, wallets, launchpad, Reddit), overlaps and 3x rechecks |
-| **Brain: nightly filing / attention / morning page / Sunday review** | **6** | 11 PM daily · 5 PM weekdays · 7:30 AM weekdays · Sun 6 PM | draft-only second brain |
+| **Brain: nightly filing / focus update / morning page / Sunday review** | **6** | 11 PM daily · 5 PM weekdays · 7:30 AM weekdays · Sun 6 PM | draft-only second brain; live in the reference install, paused until your yes in yours |
 
 ---
 
