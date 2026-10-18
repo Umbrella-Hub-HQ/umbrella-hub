@@ -50,6 +50,15 @@ Pack 6's watchers use the generic, read-only scripts in [`tools/`](../tools/). A
 - **flywheel_watch**: copy `flywheel_config.example.json`, re-check the public constants on an explorer, run `--once`, then `bash start_flywheel_watch.sh`.
 - **Wallet lists**: build your own from your own research using `tools/wallets.example.json`. Run `ring_filter.py --test`.
 
+## Step 4 (optional): set up the Brain
+
+Pack 6 includes the Brain, a draft-only second-brain bot (live in the reference install). Read [`brain/README.md`](../brain/README.md), then tell your bot:
+
+> Set up the Brain from pack 6. Show me the bot description and folder first. Create the folder from the blank templates only, ask me which email account (if any) it may read, and ask me yes before each of the 4 routines. Keep them paused.
+
+- Email filing is optional: pick one account (read-only) and create the label yourself; the Brain never creates or changes labels.
+- Its 4 routines (nightly filing, focus update, morning page, Sunday review) never send to anyone but you, never trade, and start paused.
+
 ## Hub rules
 
 - **No access to anyone's bots or data.** The hub, other owners and their bots can't reach your bot, and your bot never reads or touches a friend's bot or data.
