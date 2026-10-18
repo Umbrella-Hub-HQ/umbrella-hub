@@ -1,0 +1,9 @@
+{
+  "_note": "Optional watched-wallet list shared by flywheel_watch and ring_filter. Example placeholders only; replace with wallets YOU chose to watch. Grades: CONFIRMED / STRONG / INFERENCE / UNKNOWN. insider_ring = a ring id from your own Rug Shield research (flag only, never act). provisional_ring = counts as ring only next to a real ring wallet.",
+  "wallets": [
+    {"address": "0xEXAMPLE_ROBINHOOD_CHAIN_WALLET_1", "chain": "robinhood", "caller": "Example caller A", "role": "caller wallet", "grade": "STRONG"},
+    {"address": "EXAMPLE_SOLANA_WALLET_1", "chain": "solana", "caller": "Example caller B", "role": "caller wallet", "grade": "CONFIRMED", "also_chains": []},
+    {"address": "EXAMPLE_SOLANA_RING_WALLET_1", "chain": "solana", "caller": "ring", "role": "insider ring", "grade": "INFERENCE", "insider_ring": "RING-EXAMPLE-1"},
+    {"address": "EXAMPLE_SOLANA_RING_WALLET_2", "chain": "solana", "caller": "ring", "role": "insider ring (pending)", "grade": "INFERENCE", "provisional_ring": "RING-EXAMPLE-1"}
+  ]
+}

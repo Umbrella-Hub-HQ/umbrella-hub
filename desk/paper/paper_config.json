@@ -1,0 +1,10 @@
+{
+ "_note": "PAPER ONLY desk config. starting_bankroll_usd is the ONE bankroll value: reset_paper_book.py starts the main paper book with it, and experiment sub-books (scoring/weights.json experiments.*.start_usd = null) inherit it. Allowed range $250-500 (default $250); reset_paper_book.py refuses anything else. The owner picks the value at setup. Changing it does not touch a running book: run reset_paper_book.py (it archives the old book first, or creates the first book if none exists).",
+ "starting_bankroll_usd": 250,
+ "allowed_range_usd": [
+  250,
+  500
+ ],
+ "set_et": null,
+ "set_by": "template default ($250); owner may choose $250-500"
+}

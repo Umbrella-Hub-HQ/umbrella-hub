@@ -1,0 +1,57 @@
+{
+ "_note": "READ-ONLY flywheel.cash (Robinhood Chain) launch + migration watcher config. No trades, signing, payments, sends or posts. Protocol constants below are public on-chain facts read on 2026-10-17; re-verify them on a block explorer before relying on them. Watched wallets are optional: put them in wallets.json (chain=robinhood) or extra_watched. Change thresholds only with the owner's OK.",
+ "poll_s": 60,
+ "track_h": 6,
+ "first_backfill_blocks": 6000,
+ "max_blocks_per_poll": 20000,
+ "factory": "0xf05a26e92e27b8f0385f6895f5507db26a2f4b8d",
+ "created_topic": "0x8f9d1d4b2dfe54f1d49ec1d5b6a7b5bc380b5fac115339c49e671127d1481c69",
+ "_created_topic_note": "TokenCreated(address indexed token, address indexed creator, address indexed quote)",
+ "pool_manager": "0x8366a39cc670b4001a1121b8f6a443a643e40951",
+ "hook": "0x992118de23b4ebe9f527dacbbb7d8d4bbbf8e044",
+ "fee_router": "0x3bb49db5a7ee80c9c132b9f7376058f11b0d9c7b",
+ "routers": [
+  "0xb92fe925dc43a0ecde6c8b1a2709c170ec4fff4f",
+  "0x0da5899dbb36bd741885d4228f04cd9c6304fc56",
+  "0x24a4d86c8a76b00ee9566ed9c9ff4f0c3faf0da7",
+  "0x8f10b468b06c6fd214b65f87778827f7d113f996",
+  "0x0005ea38eb0a69d1253508ebdbdb9ea8cb26b5ef",
+  "0x6aa80dbbed9ae5ab45fbf61f9644fada3b29326e"
+ ],
+ "weth": "0x0bd7d308f8e1639fab988df18a8011f41eacad73",
+ "usd_stables": [
+  "0x5fc5360d0400a0fd4f2af552add042d716f1d168"
+ ],
+ "api_tokens": "https://flywheel.cash/api/indexer/v2/tokens",
+ "rh_rpcs": [
+  "https://rpc.mainnet.chain.robinhood.com",
+  "https://robinhood-rpc.publicnode.com"
+ ],
+ "factory_owner": "0xf9b9b1a0b12f8aa50cbaa32628fcc07f7c0c64ab",
+ "extra_watched": [
+  {
+   "address": "0xYOUR_WATCHED_WALLET_ADDRESS_HERE",
+   "label": "Example watched wallet",
+   "grade": "INFERENCE"
+  }
+ ],
+ "deployers": [
+  {
+   "address": "0xEXAMPLE_DEPLOYER_ADDRESS_HERE",
+   "label": "Example deployer you want flagged"
+  }
+ ],
+ "ignore": [],
+ "creator_buy_pct": 5,
+ "watched_high_pct": 0.05,
+ "watched_high_usd": 500,
+ "watched_high_min_mc": 50000,
+ "_watched_high_note": "HIGH if est. size >= $500, or >= 0.05% of supply while mcap >= $50K (launch-second snipes at a $3K mcap stay MEDIUM)",
+ "fast_mult": 3,
+ "fast_min_usd": 150000,
+ "fast_window_min": 60,
+ "big_mc_usd": 500000,
+ "big_window_h": 3,
+ "mig_min_recipients": 50,
+ "mig_window_min": 15
+}

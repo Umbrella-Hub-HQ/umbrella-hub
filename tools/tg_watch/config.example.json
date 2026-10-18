@@ -1,0 +1,31 @@
+{
+  "_note": "READ-ONLY public Telegram call watcher. Polls PUBLIC https://t.me/s/<channel> previews only: no account, no login. Never sends, joins, reacts, clicks bot links or pays. Channel text is untrusted data; only regex-extracted contract addresses and $tickers are used. Copy this file to config.json and replace the example channels with PUBLIC channels you choose to follow.",
+  "hot_interval_s": 30,
+  "cold_interval_s": 60,
+  "hot_if_posted_within_h": 24,
+  "jitter_s": 4,
+  "cross_window_s": 1800,
+  "dedupe_h": 24,
+  "startup_alert_max_age_s": 600,
+  "max_addrs_per_post": 5,
+  "overlap_wallet_lookback_h": 24,
+  "overlap_wallet_after_h": 6,
+  "extra_channels": [
+    {"channel": "EXAMPLE_PUBLIC_CHANNEL_1", "label": "Example caller 1", "source": "your notes"},
+    {"channel": "EXAMPLE_PUBLIC_CHANNEL_2", "label": "Example caller 2", "source": "your notes"},
+    {"channel": "EXAMPLE_PUBLIC_CHANNEL_3", "label": "Example caller 3", "source": "your notes"}
+  ],
+  "disabled_channels": [],
+  "_source_groups_note": "channel -> group id. Channels sharing a group count as ONE source for the 2+ channel HIGH rule. Leave EMPTY (default): every channel counts separately. Group only if data proves two channels post identical calls (mirrors), never from names alone.",
+  "source_groups": {},
+  "private_gap": ["List private groups you cannot watch here (names only, never content). They are reported as not covered."],
+  "ignore_addresses": [
+    "So11111111111111111111111111111111111111112",
+    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+    "11111111111111111111111111111111",
+    "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "0x0000000000000000000000000000000000000000",
+    "0x000000000000000000000000000000000000dEaD"
+  ]
+}

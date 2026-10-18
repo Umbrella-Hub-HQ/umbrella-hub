@@ -1,0 +1,77 @@
+{
+ "_note": "Gem score weights (sum of weights = 100). Edit + re-run backtest.py to recalibrate. Reference weights were tuned on one small sample (n small); re-tune on your own alerts. Penalties subtract points.",
+ "weights": {
+  "sources": 24,
+  "owner_callers": 8,
+  "smart_money": 10,
+  "liquidity": 10,
+  "liq_mcap": 4,
+  "vol_liq": 7,
+  "flow": 9,
+  "momentum": 8,
+  "age": 4,
+  "migration": 3,
+  "safety": 13
+ },
+ "penalties": {
+  "promo_only": 5,
+  "x_paid_promo_each": 3,
+  "ring_flag": 15,
+  "chase_5x": 5,
+  "chase_10x": 10,
+  "off_peak_50": 8,
+  "copycat": 10
+ },
+ "thresholds": {
+  "paper_entry": 62,
+  "ping": 55,
+  "watch": 45
+ },
+ "source_window_h": 3,
+ "promo_channels": [],
+ "source_groups": {},
+ "owner_caller_channels": [],
+ "x_paid_promo_accounts": [],
+ "_owner_callers_note": "fallback only: the live list = tools/wallet_watch/config.json caller_feeds[*].tg if you run a wallet watcher; otherwise list the public caller channels you trust most here.",
+ "experiments": {
+  "exit_lock_50": {
+   "active": true,
+   "applies_to": "new gem_score paper positions (pos.exit_experiment)",
+   "approved": "template default: PAPER ONLY (owner may set active=false)",
+   "rule": "profit lock (stop >= net breakeven) at peak >= +50% instead of +10%; keep half the gain from 2x; trail 35%/<3x, 30%/3-5x, 25%/>5x (STRONG+NEUTRAL), FADING 25%, past 24h 20%",
+   "code": "desk/paper/paper_monitor.py EXIT_EXPERIMENTS / exit_params(); matches desk/scoring/backtest.py EXIT_VARIANT=wide",
+   "unchanged": "-30% hard stop until lock, RUG/SANITY guards, BREAKING (pre-lock needs m5<=-5%), FADING partials >=+25%, 24h time stop; live desk rules + protocols/exit-rules.md untouched",
+   "started_et": null
+  },
+  "contrarian_1p5x": {
+   "active": true,
+   "approved": "template default: PAPER ONLY (no real trades, no wallets). Owner may set active=false.",
+   "rule": "ALSO paper-enter calls the gem filters would skip (soft fails: momentum, fake volume, already ran, liquidity caps, low-ish score, soft 'already dumped' veto) when the call came from the owner's own sources (tg_watch channels, caller watch, wallet watch/flywheel). Never on a hard veto (live mint/freeze authority, honeypot, Rugcheck rugged, Rug Shield REJECT, liq < $5K, m5 <= -50%); fail-closed if Rugcheck/sell route/liquidity unknown.",
+   "size_usd": 5.0,
+   "start_usd": null,
+   "_start_usd_note": "null = inherit desk/paper/paper_config.json starting_bankroll_usd (one value; default $250)",
+   "tp_x": 1.5,
+   "stop_pct": -35.0,
+   "timeout_h": 24,
+   "track_h": 24,
+   "reach_levels": [
+    1.5,
+    2.0,
+    3.0
+   ],
+   "min_score": 30,
+   "fresh_min": 20,
+   "max_open": 25,
+   "max_entries_per_day": 60,
+   "max_checks_per_cycle": 6,
+   "require_sell_route_ok": true,
+   "code": "desk/scoring/contrarian.py (hooked from gem_paper.cycle); book desk/paper/contrarian_1p5x_book.json; journal desk/paper/contrarian_1p5x_journal.jsonl; scorecard desk/reports/contrarian_1p5x_scorecard_latest.md + section in gem_scorecard_latest.md",
+   "unchanged": "main paper book, gem entries/thresholds, exit rules v3.2a + exit_lock_50, protocols/exit-rules.md, live desk rules",
+   "started_et": null
+  }
+ },
+ "exit_experiment": "exit_lock_50",
+ "_source_groups_note": "Empty by default: every channel is a separate source. Group channels (channel -> group id) only if data proves they post identical calls (e.g. mirrors); grouped channels then count as ONE source.",
+ "_promo_channels_note": "Public channels you consider promo/paid-shill feeds (a call ONLY from these gets the promo_only penalty). Empty by default; fill with your own picks.",
+ "_x_paid_promo_note": "X accounts you have evidence are paid promoters (penalty x_paid_promo_each). Empty by default. Never add an account from its name alone; verify first."
+}

@@ -2,6 +2,34 @@
 
 All notable changes to the Umbrella template are listed here. Each released version is also published as a GitHub Release.
 
+## 2026-10-18: paper gem desk, Money Desk, verification rule (unreleased)
+
+- **Pack 6 updated** (13 skills, 7 routines; 45,563 bytes):
+  - New skill `paper-gem-desk`: PAPER-ONLY weighted gem score, configurable paper bankroll, `exit_lock_50` and `contrarian_1p5x` experiments.
+  - New skill `specialist-money-desk`: one read-only personal-finance seat (card picker + subscription audit + weekly spend) replacing three separate bots; draft-only, at most one monthly routine.
+  - `telegram-call-watcher`: every channel counts as its own source; `source_groups` empty by default.
+  - `team-daily-stop-and-delegation-addendum`: verification rule: never conclude from a name, title or assumption; check the primary source; label anything unchecked UNVERIFIED.
+- **New `desk/`** (generic, PAPER ONLY): `paper/paper_config.json` (bankroll $250-500, default $250), `paper/reset_paper_book.py` (first book or archive + fresh start), exit rules v3.2a with per-position experiments, `scoring/` gem score + engine + `contrarian.py` + scorecards + backtest, `weights.json` with an `experiments` block and EMPTY channel lists, tests (84; 2 skip without install-specific files).
+- **tg_watch**: `source_groups` support (channel -> group id; empty = every channel separate), example config key, `test_source_groups.py`.
+- `.gitignore`: desk runtime state.
+
+## 2026-10-17: Live Watchers & Brain add-on (v9 add-on, unreleased)
+
+Added as hub downloads. Pack 1 (the bot template) is unchanged until a new template version is published.
+
+- **Pack 6: Live Watchers & Brain** (`packs/umbrella-template-v9-pack6.stage-payload.json`, 11 skills, 7 routines; needs packs 1-2). Routines are created only on the owner's yes and start paused.
+  - Skills: `free-first-data-providers`, `telegram-call-watcher`, `multichain-wallet-watch-and-ring-rule`, `launchpad-launch-watcher`, `wallet-deep-dive-methods`, `perps-lab-learn-and-paper`, `specialist-brain`, `brain-thinking-os`, `brain-folder-scaffold`, `brain-skills-library`, `team-daily-stop-and-delegation-addendum`.
+  - Routines: `telegram-call-alerts` (every 5 min), `wallet-watch-check` (every 15 min, incl. launchpad alerts and ring flags to the Trading Desk room), `caller-community-watch` (every 30 min, all sources), `brain-nightly-filing`, `brain-focus-update`, `brain-morning-page`, `brain-sunday-review`.
+- **Brain (live):** the second-brain bot is complete in pack 6: role card with a fill-in bot description, thinking OS, blank folder scaffold (INDEX, rules, me, attention, voice, thinking-os, log; people/ projects/ skills/ out/ raw/), skills library (first-principles-breakdown, the-algorithm-review, note-to-plan, idea-to-post), optional read-only email-label filing, and 4 routines: nightly filing (11 PM daily), focus update (5 PM weekdays), morning page (7:30 AM weekdays), Sunday review (6 PM Sundays). All draft-only, never trade, never send; created only on the owner's yes and start paused. New guide `brain/README.md` and blank templates in `brain/template/`.
+- **Generic tools** (`tools/`, read-only, no keys/wallets/channel lists):
+  - `sol_data/`: free-first Solana client (public RPC rotation + optional Alchemy free tier + Helius only while under cap; caches, backoff, box-wide pacing; v1-transaction fix) and `pnl_multi.py` (multi-currency PnL: SOL/wSOL/USDC/USDT/other stables/ETH/WETH, token-for-token swaps, fees). `sol_data.env.example` uses `YOUR_ALCHEMY_KEY`.
+  - `tg_watch/`: near-real-time public Telegram call watcher (30/60-s polls; HIGH on 2+ channels within 30 min or a watched-wallet overlap; rug/dump flags; self-healing launcher; offline `--test`).
+  - `flywheel_watch/`: flywheel.cash launch/migration watcher (WATCHED_RECEIVE, CREATOR_LAUNCH_BUY, LAUNCH_BY_WATCHED, MIGRATION, FAST_MC; replay mode; self-healing launcher).
+  - `ring_filter/`: insider-ring cluster classifier (RING_FLAG / RING+STRONG / RING+INDEPENDENT, provisional rings) with a 7-case self-test.
+  - `_http.py` (shared polite HTTP client), `wallets.example.json` (placeholder wallet-list format), `.gitignore` for env files and runtime state.
+- **Rule updates documented:** free-first provider fallback (never pay, never multi-account a provider); Rug Shield operator-ring rule (ring-traced deployer/first buyers = HIGH_RISK at best, REJECT if proceeds sweep back); team daily stop counts unrealized losses; HQ-approves-for-owner with the owner-only locked list; rooms-first routine saves; "deeper" trigger; Perps Lab is learn + paper only with live leverage locked.
+- **Docs:** new `docs/CAPABILITIES.md` (full bot-by-bot capabilities, routines, tools, safety rails, setup, locks); README and `packs/HOW-TO-INSTALL.md` updated for pack 6, the Brain and tools.
+
 ## v9 (unreleased)
 
 - Umbrella Hub set up: updates go out as Releases, and weekly reports come in as issues.
