@@ -26,8 +26,8 @@ Contents: [1. Packs at a glance](#1-packs-at-a-glance) · [2. The team, bot by b
 | 3 | Robinhood, Quant & Evolve | 10 | 7 | [`packs/…-pack3.stage-payload.json`](../packs/umbrella-template-v9-pack3.stage-payload.json) |
 | 4 | Content & Research | 13 | 2 | [`packs/…-pack4.stage-payload.json`](../packs/umbrella-template-v9-pack4.stage-payload.json) |
 | 5 | Academy & Org | 18 | 1 | [`packs/…-pack5.stage-payload.json`](../packs/umbrella-template-v9-pack5.stage-payload.json) |
-| **6** | **Live Watchers & Brain (new, 2026-10-17)** | **11** | **7** | [`packs/…-pack6.stage-payload.json`](../packs/umbrella-template-v9-pack6.stage-payload.json) + [`tools/`](../tools/) |
-| | **Total** | **62** | **35** | |
+| **6** | **Live Watchers & Brain (2026-10-17, updated 2026-10-18)** | **13** | **7** | [`packs/…-pack6.stage-payload.json`](../packs/umbrella-template-v9-pack6.stage-payload.json) + [`tools/`](../tools/) + [`desk/`](../desk/) |
+| | **Total** | **64** | **35** | |
 
 Packs are **data the bot fetches**: you give your Umbrella Chief bot the raw link, it reads the JSON, tells you what's
 in it, saves the skills, and creates each routine only after you say yes to that routine.
@@ -187,6 +187,19 @@ partial-read honesty. Every claim is dated and labelled FACT / REPORTED / SPECUL
 pass the research gate (`quality-gates-protocols`) before use.
 
 ---
+
+### 3.8 Paper gem desk — `desk/` (Pack 6 skill `paper-gem-desk`, added 2026-10-18, PAPER ONLY)
+- **Bankroll:** `desk/paper/paper_config.json` `starting_bankroll_usd`, owner picks $250-500 (default $250); `reset_paper_book.py` creates the first book or archives the old one first.
+- **Gem score:** weighted 0-100 (sources, owner callers, smart money, liquidity, liq/mcap, vol/liq, flow, momentum, age, migration, safety) with penalties; watch 45 / ping 55 / paper entry 62; only true hard vetoes block. Channel lists ship empty.
+- **exit_lock_50** (paper experiment): profit lock at +50% instead of +10% for new gem positions.
+- **contrarian_1p5x** (paper experiment): $5 entries on calls the filters skip (soft fails only) from the owner's own sources; TP 1.5x / stop -35% / 24 h; own sub-book and scorecard.
+- **tg_watch independent sources:** every channel counts separately; `source_groups` only for proven mirrors.
+
+### 3.9 Money Desk (Pack 6 skill `specialist-money-desk`, optional)
+One read-only personal-finance seat: card picker, subscription audit (kill list), weekly spend summary. Draft-only; nothing paid, cancelled, unsubscribed or sent without the owner's yes for that item; at most one monthly routine.
+
+### 3.10 Verification rule (all bots)
+Never conclude from a name, title, ticker or assumption. Check the primary source; label anything not checked UNVERIFIED.
 
 ## 4. Routines (all start paused)
 
