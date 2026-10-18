@@ -50,6 +50,12 @@ Pack 6's watchers use the generic, read-only scripts in [`tools/`](../tools/). A
 - **flywheel_watch**: copy `flywheel_config.example.json`, re-check the public constants on an explorer, run `--once`, then `bash start_flywheel_watch.sh`.
 - **Wallet lists**: build your own from your own research using `tools/wallets.example.json`. Run `ring_filter.py --test`.
 
+## Step 3b (optional): set up the paper gem desk
+
+Pack 6 skill `paper-gem-desk` uses [`desk/`](../desk/) (PAPER ONLY). Tell your bot:
+
+> Set up the paper gem desk from pack 6. Ask me my paper bankroll ($250-500, default $250), show me weights.json, keep the channel lists empty until I give you my own, run the tests, and ask me yes before starting any loop.
+
 ## Step 4 (optional): set up the Brain
 
 Pack 6 includes the Brain, a draft-only second-brain bot (live in the reference install). Read [`brain/README.md`](../brain/README.md), then tell your bot:

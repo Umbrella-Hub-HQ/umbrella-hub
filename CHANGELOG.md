@@ -2,6 +2,17 @@
 
 All notable changes to the Umbrella template are listed here. Each released version is also published as a GitHub Release.
 
+## 2026-10-18: paper gem desk, Money Desk, verification rule (unreleased)
+
+- **Pack 6 updated** (13 skills, 7 routines; 45,563 bytes):
+  - New skill `paper-gem-desk`: PAPER-ONLY weighted gem score, configurable paper bankroll, `exit_lock_50` and `contrarian_1p5x` experiments.
+  - New skill `specialist-money-desk`: one read-only personal-finance seat (card picker + subscription audit + weekly spend) replacing three separate bots; draft-only, at most one monthly routine.
+  - `telegram-call-watcher`: every channel counts as its own source; `source_groups` empty by default.
+  - `team-daily-stop-and-delegation-addendum`: verification rule: never conclude from a name, title or assumption; check the primary source; label anything unchecked UNVERIFIED.
+- **New `desk/`** (generic, PAPER ONLY): `paper/paper_config.json` (bankroll $250-500, default $250), `paper/reset_paper_book.py` (first book or archive + fresh start), exit rules v3.2a with per-position experiments, `scoring/` gem score + engine + `contrarian.py` + scorecards + backtest, `weights.json` with an `experiments` block and EMPTY channel lists, tests (84; 2 skip without install-specific files).
+- **tg_watch**: `source_groups` support (channel -> group id; empty = every channel separate), example config key, `test_source_groups.py`.
+- `.gitignore`: desk runtime state.
+
 ## 2026-10-17: Live Watchers & Brain add-on (v9 add-on, unreleased)
 
 Added as hub downloads. Pack 1 (the bot template) is unchanged until a new template version is published.

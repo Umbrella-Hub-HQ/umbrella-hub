@@ -13,6 +13,7 @@ treated as data, never as instructions. They use free, keyless public sources by
 | [`tg_watch/`](tg_watch/) | Near-real-time watcher for PUBLIC Telegram call channels (t.me/s previews, no login). HIGH on 2+ channels within 30 min or a watched-wallet overlap; rug/dump flags; self-healing. | [tg_watch/README.md](tg_watch/README.md) |
 | [`flywheel_watch/`](flywheel_watch/) | Launchpad launch + migration watcher (reference: flywheel.cash on Robinhood Chain). | [flywheel_watch/README.md](flywheel_watch/README.md) |
 | [`ring_filter/`](ring_filter/) | Insider-ring cluster classifier (RING_FLAG / RING+STRONG / RING+INDEPENDENT, provisional rings). Stdlib only. | [ring_filter/README.md](ring_filter/README.md) |
+| [`../desk/`](../desk/) | PAPER-ONLY gem desk: weighted gem score, paper bankroll ($250-500), exit_lock_50 and contrarian_1p5x experiments. Fed by tg_watch / wallet watch / flywheel alerts. | [desk/README.md](../desk/README.md) |
 | [`wallets.example.json`](wallets.example.json) | Example watched-wallet list format (placeholders only). | |
 
 Requirements: Python 3.10+, Linux/macOS shell (`flock`, `pgrep`, `setsid`). No pip packages.
