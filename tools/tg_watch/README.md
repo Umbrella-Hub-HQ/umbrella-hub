@@ -36,3 +36,8 @@ Private groups are out of scope (they need a logged-in session). List their name
 they are not covered. Never put private chat names or content in a public repo.
 
 Pair it with the **Telegram call alerts** routine (every 5 min) in Pack 6. Calls are leads, never buy signals.
+
+## Independent sources (`source_groups`)
+Every channel counts as its own source for the 2+ channel HIGH rule. `source_groups` (channel -> group id) is EMPTY by default.
+Group two channels only if data proves they post identical calls (mirrors); grouped channels then count once and the alert says
+"counted as one source, not HIGH". Never group from a channel's name alone. Test: `python3 test_source_groups.py`.

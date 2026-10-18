@@ -92,6 +92,20 @@ def log(msg):
 
 
 # ------------------------------------------------------------------ channels
+def source_group(ch: str, cfg) -> str:
+    """Channels listed together in cfg['source_groups'] (channel -> group id, case-insensitive) count as ONE source
+    for the multi-channel HIGH rule. Empty by default: every channel counts separately. Group channels only when data
+    shows they post identical calls (mirrors); never group from a channel's name alone."""
+    g = {k.lower(): v for k, v in (cfg.get("source_groups") or {}).items()}
+    return g.get((ch or "").lower(), (ch or "").lower())
+
+
+def independent_groups(prior_channels, own_ch: str, cfg) -> list[str]:
+    """Distinct source groups among prior callers, excluding the poster's own group."""
+    own = source_group(own_ch, cfg)
+    return sorted({source_group(c, cfg) for c in prior_channels} - {own})
+
+
 def load_channels(cfg) -> list[dict]:
     out, seen = [], set()
 
@@ -399,9 +413,12 @@ class Watcher:
             reasons = []
             prio = "LOW" if ex["brag"] else "MEDIUM"
             chans = sorted({p["channel"] for p in prior})
-            if prior and not ex["brag"]:
+            indep = independent_groups(chans, c["ch"], self.cfg)
+            if indep and not ex["brag"]:
                 prio = "HIGH"
-                reasons.append(f"{len(chans) + 1} channels called this contract within {win // 60} min: {', '.join(chans + [c['ch']])}")
+                reasons.append(f"{len(indep) + 1} independent sources ({len(chans) + 1} channels) called this contract within {win // 60} min: {', '.join(chans + [c['ch']])}")
+            elif prior and not ex["brag"]:
+                reasons.append(f"also called by same-source group channel(s) {', '.join(chans)} (counted as one source, not HIGH)")
             if ov:
                 prio = "HIGH"
                 reasons.append("watched wallet overlap: " + "; ".join(
