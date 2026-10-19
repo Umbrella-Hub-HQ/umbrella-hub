@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Umbrella-Hub-HQ/umbrella-hub/blob/main/docs/blueprint/contribution-manifest.schema.json",
+  "title": "Umbrella Developer Network contribution manifest (DRAFT)",
+  "description": "DRAFT, PROPOSED, NOT_RUN. Describes one sanitized contribution (skill, routine, tool, role card, doc or report) from an independently owned contributor bot. The manifest is data only: HQ validates it and never executes anything it points to. No secrets, personal data, wallet data, creator content, subscriber data or consent records may appear in any field.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "contribution_id",
+    "kind",
+    "title",
+    "summary",
+    "source",
+    "license",
+    "version",
+    "contributor",
+    "capabilities",
+    "files",
+    "review",
+    "tests",
+    "status",
+    "attestations"
+  ],
+  "properties": {
+    "manifest_version": {
+      "const": "0.1-draft",
+      "description": "Schema version this manifest follows."
+    },
+    "contribution_id": {
+      "type": "string",
+      "pattern": "^C-[0-9]{8}-[a-z0-9-]{3,48}$",
+      "description": "C-YYYYMMDD-short-slug. Unique per contribution."
+    },
+    "kind": {
+      "enum": ["skill", "routine", "tool", "role-card", "doc", "report", "pack-patch"],
+      "description": "What is being contributed."
+    },
+    "title": { "type": "string", "minLength": 3, "maxLength": 120 },
+    "summary": { "type": "string", "minLength": 10, "maxLength": 1200 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "url"],
+      "description": "Where the contribution came from (provenance).",
+      "properties": {
+        "type": { "enum": ["original", "fork", "adapted", "third-party"] },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://", "description": "Public URL of the contributor's own repo/PR. Never a private or signed URL." },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+        "upstream": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "url", "license"],
+            "properties": {
+              "name": { "type": "string" },
+              "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+              "license": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX identifier for the contribution (e.g. MIT, Apache-2.0, CC-BY-4.0). UNKNOWN is rejected.",
+      "pattern": "^(?!UNKNOWN$)[A-Za-z0-9.+-]+( (AND|OR|WITH) [A-Za-z0-9.+-]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$",
+      "description": "Semantic version of this contribution."
+    },
+    "compatible_with": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^v[0-9]+(-pack[1-9])?$" },
+      "description": "Template versions/packs this targets, e.g. v9, v9-pack4."
+    },
+    "contributor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["github_login", "bot_name", "owner_consent"],
+      "description": "Public identity only. No email, real name, location or contact details.",
+      "properties": {
+        "github_login": { "type": "string", "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$" },
+        "bot_name": { "type": "string", "maxLength": 64 },
+        "owner_consent": { "const": true, "description": "The contributor bot's owner approved sending this contribution." }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested", "network", "writes", "executes_code", "needs_credentials"],
+      "description": "What the contribution would be able to do if an owner later adopts it. HQ never grants these; adopting owners decide.",
+      "properties": {
+        "requested": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "read-public-web",
+              "read-public-chain-data",
+              "read-owner-files",
+              "write-owner-files",
+              "draft-messages",
+              "draft-posts",
+              "paper-trading",
+              "none"
+            ]
+          },
+          "description": "Allowed capability vocabulary. Live trading, signing, fund moves, sending, posting and credential access are deliberately NOT in the list and cannot be requested."
+        },
+        "network": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$" }, "description": "Hostnames contacted, public only." },
+        "writes": { "type": "array", "items": { "type": "string" }, "description": "Relative paths it would write on the adopter's machine." },
+        "executes_code": { "type": "boolean", "description": "True if it ships runnable code. Code is never run by HQ; adopters run it only after review and their yes." },
+        "needs_credentials": { "type": "boolean", "description": "True if an adopter would need their own key. Keys are never included; placeholders like YOUR_API_KEY only." }
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "bytes"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^(?!/)(?!.*\\.\\.)[A-Za-z0-9._/-]+$", "description": "Relative path inside the contribution. No absolute paths or '..'." },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "bytes": { "type": "integer", "minimum": 0, "maximum": 1048576 }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "version", "ecosystem", "license"],
+        "properties": {
+          "name": { "type": "string" },
+          "version": { "type": "string", "description": "Pinned exact version; ranges are rejected by CI." },
+          "ecosystem": { "enum": ["pypi", "npm", "none"] },
+          "license": { "type": "string" }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "description": "Filled by HQ reviewers, not the contributor. Contributors submit state 'unreviewed'.",
+      "properties": {
+        "state": { "enum": ["unreviewed", "in-review", "changes-requested", "approved", "rejected"] },
+        "reviewers": { "type": "array", "items": { "type": "string" } },
+        "audit_request": { "type": "string", "format": "uri", "description": "Link to the audit-request issue/PR." },
+        "notes": { "type": "string", "maxLength": 4000 }
+      }
+    },
+    "tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["VERIFIED", "NOT_RUN", "BLOCKED", "FAILED"] },
+        "command": { "type": "string", "description": "Offline test command, for human reviewers to run in a sandbox. CI does not run it." },
+        "offline": { "type": "boolean" },
+        "evidence": { "type": "string", "maxLength": 4000 }
+      }
+    },
+    "status": {
+      "enum": ["submitted", "quarantined", "validated", "approved", "released", "rejected", "withdrawn"],
+      "description": "Lifecycle state. Contributors may only set 'submitted'. Only HQ moves it forward; 'released' requires the owner's yes."
+    },
+    "attestations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["no_secrets", "no_personal_data", "no_creator_or_adult_content", "no_wallet_data", "no_auto_execution"],
+      "description": "Contributor's statements. CI checks them; a false attestation is a reject.",
+      "properties": {
+        "no_secrets": { "const": true },
+        "no_personal_data": { "const": true },
+        "no_creator_or_adult_content": { "const": true },
+        "no_wallet_data": { "const": true },
+        "no_auto_execution": { "const": true }
+      }
+    }
+  }
+}
