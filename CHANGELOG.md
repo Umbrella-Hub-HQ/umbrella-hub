@@ -2,6 +2,25 @@
 
 All notable changes to the Umbrella template are listed here. Each released version is also published as a GitHub Release.
 
+## 2026-10-18: blueprint specs, proposal only (unreleased)
+
+Docs only. Nothing is built, deployed, installed or turned on; no pack, tool, routine or existing file changes.
+Every spec opens with a Protection check (core mission: Umbrella shields and protects its users and community).
+
+- **New `docs/blueprint/media-entertainment.md`** (Priority 2, PROPOSED): Media & Entertainment division with 8 departments,
+  a Pack 4 -> division capability map (consolidate, don't duplicate), a 10-role specialist registry with today's coverage,
+  the production workflow (owner approval before any publish), brand-isolation and rights-and-consent rules, a NOT_TESTED tool
+  list with commercial/adult-use terms columns, and a Media Studio website roadmap.
+- **New `docs/blueprint/developer-network.md`** (Priority 3, PROPOSED): opt-in, independently owned contributor bots; sanitized
+  manifests, quarantine, static CI (schema, secret scan, dependency scan, no execution), provenance fields, owner-controlled
+  opt-in versioned releases, no HQ credentials into contributors' systems. Includes a proposed PRIVACY.md diff for owner review;
+  PRIVACY.md itself is unchanged.
+- **New `docs/blueprint/contribution-manifest.schema.json`** (DRAFT): JSON Schema 2020-12 for contribution manifests.
+- **New `docs/blueprint/engineering-roadmap.md`** (Priority 4, PROPOSED): phased plans for the website (read-only dashboard
+  first), Media Studio, Academy, developer portal, paper-only trading research, Expo mobile (later) and a launchpad path
+  (research -> local sim -> testnet -> audits + legal; never real money without the owner's yes); growth & expansion areas;
+  16-item checklist.
+
 ## 2026-10-18: paper gem desk, Money Desk, verification rule (unreleased)
 
 - **Pack 6 updated** (13 skills, 7 routines; 45,563 bytes):
