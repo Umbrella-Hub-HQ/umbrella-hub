@@ -1,0 +1,32 @@
+name: Audit request
+description: HQ asks an independent auditor to review an update
+title: "[audit] "
+labels: ["audit-request"]
+body:
+  - type: textarea
+    id: summary
+    attributes: {label: What changed and why}
+    validations: {required: true}
+  - type: textarea
+    id: commits
+    attributes: {label: Commits and changed files}
+    validations: {required: true}
+  - type: textarea
+    id: expected
+    attributes: {label: Expected behavior}
+  - type: textarea
+    id: tests
+    attributes: {label: Tests run and results (VERIFIED / NOT_RUN / BLOCKED)}
+  - type: textarea
+    id: risks
+    attributes: {label: Risks and privacy implications}
+  - type: input
+    id: divisions
+    attributes: {label: Affected divisions}
+  - type: textarea
+    id: rollback
+    attributes: {label: Rollback instructions}
+    validations: {required: true}
+  - type: markdown
+    attributes:
+      value: "Evidence labels: VERIFIED, DERIVED, REPORTED, NOT_RUN, BLOCKED, UNKNOWN, CONFLICT. HQ answers each finding ACCEPTED, DECLINED (with reason) or NEEDS_TEST. Never paste secrets, wallet data or private/creator content."
