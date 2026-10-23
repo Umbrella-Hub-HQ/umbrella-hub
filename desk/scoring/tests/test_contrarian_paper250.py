@@ -3,6 +3,8 @@
 contrarian_1p5x experiment. Offline: no network (G fetchers stubbed), temp files only; never touches the real books.
 Run (from the repo root): python3 -m unittest discover -s desk/scoring/tests -v"""
 import json,os,sys,copy,tempfile,unittest,datetime as D
+from unittest.mock import patch
+from types import SimpleNamespace
 ROOT=os.environ.get("UMBRELLA_HOME") or os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))   # repo root
 HERE=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,HERE); sys.path.insert(0,os.path.join(ROOT,"desk","paper"))
 import gem_score as G, contrarian as CX, paper_monitor as PM
@@ -51,7 +53,13 @@ class Bankroll(unittest.TestCase):
             json.dump({"starting_bankroll_usd":v,"allowed_range_usd":[250,500]},open(self.cfgp,"w"))
             with self.assertRaises(SystemExit): self.R.load_cfg(self.cfgp)
     def test_reset_archives_and_starts_250(self):
-        old=self.old(); self.assertEqual(self.R.main([]),0)
+        old=self.old()
+        # This fixture is fixed to Oct 18; freeze only reset module clock.
+        class FrozenDateTime(D.datetime):
+            @classmethod
+            def now(cls, tz=None): return T0.astimezone(tz) if tz else T0.replace(tzinfo=None)
+        with patch.object(self.R, "D", SimpleNamespace(datetime=FrozenDateTime)):
+            self.assertEqual(self.R.main([]),0)
         nb=json.load(open(PM.BOOK)); self.assertEqual((nb["starting_balance"],nb["cash"],nb["equity"]),(250.0,250.0,250.0))
         self.assertEqual(nb["positions"],[]); self.assertEqual(nb["closed_trades"],[]); self.assertEqual(nb["loss_ladder"]["state"],"OK")
         ap=nb["archived_books"][-1]; a=json.load(open(ap)); self.assertTrue(os.path.basename(ap).startswith("paper_book_") and "start100" in ap)
